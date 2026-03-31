@@ -24,18 +24,17 @@ def twoSum1(nums, target):
         if target - value in hash_map:
             index2 = hash_map[target - value]
             if index1 != index2:
-                return [index1, index2]
+                return [index1+1, index2+1]
 
 def twoSum2(nums, target):
     hash_map = {}
     #for index, value in enumerate(nums):
-    #    hash_map[value] = index
-    
+    #    hash_map[value] = index    
     for index1, value in enumerate(nums):
         if target - value in hash_map:
             index2 = hash_map[target - value]
             if index1 != index2:
-                return [index1, index2]
+                return [min(index1+1, index2+1), max(index1+1, index2+1)]
         hash_map[value] = index1
     return []
     '''hash_res = {}
@@ -51,19 +50,19 @@ def twoSum3(nums, target):
     if not nums:
         return None
     num_dict = {}
-    for idx1, num1 in enumerate(nums):
-        num_dict[num1] = idx1
+    for idx1, num1 in enumerate(nums):        
         if target - num1 in num_dict:
             idx2 = num_dict[target - num1]
             if idx1 != idx2:
-                return [idx1, idx2]
+                return [min(idx1+1, idx2+1),max(idx1+1, idx2+1)]
+        num_dict[num1] = idx1
     return None    
 
 
 # main function
 if __name__ == '__main__':
-    nums = [2, 7, 11, 15]
-    target = 9
+    nums = [2, 7, 2, 15]
+    target = 4
     print("nums = {}, target = {}".format(nums, target))
 
     idx11, idx12 = twoSum1(nums=nums, target=target)
@@ -73,7 +72,7 @@ if __name__ == '__main__':
     print("solu-2: idx = {},{}".format(idx21, idx22))
 
     idx31, idx32 = twoSum3(nums=nums, target=target)
-    print("solu-2: idx = {},{}".format(idx31, idx32))
+    print("solu-3: idx = {},{}".format(idx31, idx32))
     
     #print("nums = %s" % nums)
     #print("idx = %d, %d; target = %d" % (idx1, idx2, target))

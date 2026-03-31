@@ -23,16 +23,16 @@
 """
 
 class Solution(object):
-    def back(self, grid, i, j):
+    def dfs(self, grid, i, j):
         if i<0 or i>= len(grid) or j<0 or j>= len(grid[0]):
             return
         
         if grid[i][j]=='1':
             grid[i][j] = '0'
-            self.back(grid,i-1,j)
-            self.back(grid,i+1,j)
-            self.back(grid,i,j-1)
-            self.back(grid,i,j+1)
+            self.dfs(grid,i-1,j)
+            self.dfs(grid,i+1,j)
+            self.dfs(grid,i,j-1)
+            self.dfs(grid,i,j+1)
 
 
     def numIslands(self, grid):
@@ -43,7 +43,7 @@ class Solution(object):
             for j in range(0, n):
                if grid[i][j]=='1':
                     sum += 1
-                    self.back(grid,i,j)
+                    self.dfs(grid,i,j)
                
         return sum
 

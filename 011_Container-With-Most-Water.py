@@ -41,8 +41,40 @@ class Solution(object):
                 right -= 1
         
         return result, opt_left, opt_right
+    
+    def func2(self, height_list):
+        """
+        :type height: List[int]
+        :rtype: int
+        """
+        if not height_list:
+            return None
+        
+        left = 0
+        right = len(height_list)-1
+        opt_left = left
+        opt_right = right
+        opt_area = 0
+
+        while left < right:
+            area = min(height_list[left], height_list[right]) * (right-left)
+            if area > opt_area:
+                opt_left = left
+                opt_right = right
+                opt_area = area
+            if height_list[left] < height_list[right]:
+                left += 1
+            else:
+                right -= 1
+
+        return opt_area, opt_left, opt_right
+
+
 
 
 if __name__ == "__main__":
-    print(Solution().maxArea([1, 1, 2]))
-    print(Solution().maxArea([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]))
+    #print(Solution().maxArea([1, 1, 2]))
+    #print(Solution().maxArea([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]))
+
+    height = [1,8,6,2,5,4,8,3,7] #Output: 49
+    print(Solution().func2(height))

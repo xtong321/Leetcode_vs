@@ -16,10 +16,10 @@
 
 # Definition for a binary tree node.
 class TreeNode(object):
-    def __init__(self, x):
+    def __init__(self, x, left=None, right=None):
         self.val = x
-        self.left = None
-        self.right = None
+        self.left = left
+        self.right = right
 
 class Solution(object):
     def maxDepth(self, root):

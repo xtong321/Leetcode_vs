@@ -48,6 +48,16 @@ class Solution(object):
             max_size = max(max_size, size)
         return max_size
 
+    def lengthOfLongestSubstring2(self, s: str) -> int:
+       ans = left = 0
+       window = {}
+       for right, c in enumerate(s):
+           if c in window:
+               left = max(window[c] + 1, left)
+           window[c] = right
+           ans = max(ans, right - left + 1)
+       return ans
+
 if __name__ == "__main__":
     # Input: s = "abcabcbb", Output: 3
     # Input: s = "bbbbb", Output: 1

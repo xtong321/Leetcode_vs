@@ -1,7 +1,7 @@
 """
 lru-cache
 
-请你设计并实现一个满足  LRU (最近最少使用) 缓存 约束的数据结构。
+请你设计并实现一个满足 LRU (最近最少使用) 缓存 约束的数据结构。
 实现 LRUCache 类：
 LRUCache(int capacity) 以 正整数 作为容量 capacity 初始化 LRU 缓存
 int get(int key) 如果关键字 key 存在于缓存中，则返回关键字的值，否则返回 -1 。
@@ -28,7 +28,8 @@ lRUCache.get(3);    // 返回 3
 lRUCache.get(4);    // 返回 4
 
 Idea:
-1) using a doubly linked list + hashmap, which gives O(1) time for both get() and put() operations:
+1) using a double linked list + hashmap, which gives O(1) time for both get() and put() operations:
+2) for each valid get and put, move the key to top. and update the link
 """
 
 class Node:
