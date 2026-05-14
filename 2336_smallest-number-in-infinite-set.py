@@ -26,27 +26,27 @@ class SmallestInfiniteSet:
 
 
 
-# 使用 bisect
+# using bisect
 import bisect
 class SmallestInfiniteSet2:
     def __init__(self):
-        self.s = list(range(1, 1001))  # 1 到 1000 的有序列表
+        self.s = list(range(1, 1001))  # list of [1, 1000]
 
     def popSmallest(self) -> int:
         if not self.s:
-            return -1  # 理论上不会空
+            return -1
         val = self.s[0]
-        self.s.pop(0)  # 删除最小值
+        self.s.pop(0)  # remove min-val
         return val
 
     def addBack(self, num: int) -> None:
         if num in self.s:
             return
-        bisect.insort_left(self.s, num)  # 保持有序插入
+        bisect.insort_left(self.s, num)  # make it be order
 
 
 """
-#使用 SortedSet 优化版本
+# optimized SortedSet version
 from sortedcontainers import SortedSet
 class SmallestInfiniteSet3:
     def __init__(self):
@@ -64,22 +64,48 @@ class SmallestInfiniteSet3:
 
 class SmallestInfiniteSet4:
     def __init__(self):
-        self.nums = [False] * 1002  # 数组哈希
+        self.nums = [False] * 1002  # array, init value = False
         self.small = 1
 
     def popSmallest(self) -> int:
-        # 获取当前最小值
+        # get the min-val at current
         x = self.small  # shadow copy?
         self.nums[x] = True
-        # 更新最小值
+        # update min-val
         while self.nums[self.small]:
             self.small += 1
         return x
 
     def addBack(self, num: int) -> None:
-        # 将 num 恢复为可用状态，并更新当前最小值
+        # restore num to be available status (False), and update current min-val
         self.nums[num] = False
         self.small = min(self.small, num)
+
+"""
+// C++ version
+bool removed[1001];
+
+class SmallestInfiniteSet {
+public:
+    SmallestInfiniteSet() {
+        memset(removed, false, sizeof(removed));
+    }
+    
+    int popSmallest() {
+        for (int i = 1; i <= 1000; ++i)
+            if (!removed[i]) {
+                removed[i] = true;
+                return i;
+            }
+        return -1;
+    }
+    
+    void addBack(int num) {
+        removed[num] = false;
+    }
+};
+
+"""
 
 # Your SmallestInfiniteSet object will be instantiated and called as such:
 #Input
