@@ -29,11 +29,36 @@ Explanation: There is no way to make a positive profit, so we never buy the stoc
 class Solution(object):
     def maxProfit(self, prices):
         """
+        greddy algo
         :type prices: List[int]
         :rtype: int
         """
         if not prices:
             return 0
+
+        ans = 0
+        for i in range(1, len(prices)):
+            ans += (max(prices[i]-prices[i-1], 0))
+
+        return ans
+
+    def maxProfit2(self, prices):
+        """
+        DP        
+        """
+        if not prices:
+            return 0
+
+        # init states 1)non_holding, and 2) holding stocks
+        dp0 = 0; dp1 = -prices[0]
+        N = len(prices)
+        for i in range(1, N):
+            # non_holding currently: non_holding last time / holding and sell out
+            dp0 = max(dp0, dp1 + prices[i])
+            # holding currently: holding last time / non_holding and buy in this time
+            dp1 = max(dp1, dp0 - prices[i])
+
+        return dp0
 
         ans = 0
         for i in range(1, len(prices)):
