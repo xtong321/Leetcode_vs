@@ -1,0 +1,7 @@
+.env
+.vscode/
+pyproject.toml
+.DS_Store
+.python-version
+main.py
+uv.lock
