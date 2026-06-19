@@ -5,3 +5,5 @@ pyproject.toml
 .python-version
 main.py
 uv.lock
+.vscode/settings.json
+/.vscode
